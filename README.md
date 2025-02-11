@@ -53,3 +53,32 @@ Aplikacja powinna być dostępna pod adresem http://127.0.0.1:8000/.
 - OpenStreetMap (Geolokalizacja miast)
 - Open-Meteo API (Dane pogodowe)
 
+# Instrukcja użytkowania WeatherApp
+
+## 1. Logowanie i rejestracja
+
+1. Kliknij "Zarejestruj się" na stronie głównej.  
+2. Podaj nazwę użytkownika, e-mail i hasło.  
+3. Po rejestracji zaloguj się swoim nowym kontem.  
+
+## 2. Sprawdzanie pogody
+
+1. Wpisz nazwę miasta w wyszukiwarkę.  
+2. Kliknij "Szukaj".  
+3. Zobaczysz prognozę pogody na 7 dni oraz wykres temperatury.  
+
+Dane pogodowe pochodzą z API Open-Meteo.  
+Wykres temperatury godzinowej generowany jest przez Chart.js.  
+
+## 3. Ulubione miasta
+
+1. Kliknij w ikonę serca obok nazwy miasta, aby dodać je do ulubionych.  
+2. Lista ulubionych miast pojawi się na stronie głównej.  
+3. Kliknij na nazwę miasta w ulubionych, aby ponownie sprawdzić pogodę.  
+
+## 4. Jak działa API?
+
+Aplikacja pozwala na pobieranie prognozy przez API.  
+Pełna dokumentacja znajduje się w pliku [`API.md`](API.md).  
+
+
