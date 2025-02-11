@@ -16,19 +16,25 @@ Najpierw pobierz kod z GitHuba:
 ```bash
 git clone https://github.com/TWOJ-NICK/WeatherApp.git
 cd WeatherApp
+```
 
 **### 2. Tworzenie wirtualnego środowiska i instalacja zależności**
 
+```
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate  # Windows
 pip install -r requirements.txt
+```
 
 **### 3. Wykonanie migracji bazy danych**
 
+```
 python manage.py migrate
+```
 
 **### 4. Uruchomienie serwera**
-
+```
 python manage.py runserver
+```
 
