@@ -1,4 +1,19 @@
 {% extends 'base/base.html' %}
+
+
+{% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+
 {% load static %}
 
 {% block title %}Pogoda{% endblock %}
@@ -28,15 +43,17 @@
             <div class="row align-items-center">
                 <div class="col-md-4 text-center">
                     <h2>{{ current_weather.temp }}°C</h2>
-                    <p class="weather-icon-large">🌤️</p>
+                    <p class="weather-icon-large">{{ current_weather.icon }}</p> <!-- Dynamiczna ikona -->
                 </div>
                 <div class="col-md-4">
-                    <p>💧 Wilgotność: 60%</p>
-                    <p>💨 Wiatr: 15 km/h</p>
+                    <p>💧 Wilgotność: {{ current_weather.humidity }}%</p>
+                    <p>💨 Wiatr: {{ current_weather.wind_speed }} km/h</p>
+                    <p>🌧️ Szansa opadów: {{ current_weather.precipitation }}%</p>
                 </div>
                 <div class="col-md-4 text-end">
-                    <h6>{{ date }}</h6>
-                    <p>{{ current_weather.description }}</p>
+                    <h3 class="fw-bold">{{ current_weather.weekday }}</h3> <!-- Dzień tygodnia (większy) -->
+                    <h5 class="fw-bold text-secondary">{{ current_weather.date }}</h5> <!-- Pogrubiona data -->
+                    <p class="mt-2">{{ current_weather.description }}</p> <!-- Opis pogody -->
                 </div>
             </div>
         </div>
@@ -51,14 +68,17 @@
                 <div class="card text-center mx-2 my-2" style="width: 10rem;" onclick="updateChart({{ forloop.counter0 }})">
                     <div class="card-body">
                         <h6 class="card-title">{{ day.date }}</h6>
-                        <p class="weather-icon">🌤️</p>
+                        <p class="weather-icon">{{ day.icon }}</p> <!-- Dynamiczna ikona -->
                         <p>🌡️ {{ day.temp_min }}°C - {{ day.temp_max }}°C</p>
                     </div>
                 </div>
             {% endfor %}
         </div>
 
-        <h2 class="text-center mt-4">Temperatura w ciągu dnia</h2>
+        <h2 class="text-center mt-4">
+            Temperatura w ciągu doby <span id="selectedDate">({{ weather.0.date }})</span>
+        </h2>
+
         <canvas id="tempChart" width="800" height="400"></canvas>
     {% endif %}
 </div>
@@ -94,6 +114,9 @@
     function updateChart(dayIndex) {
         tempChart.data.datasets[0].data = temperatureData[dayIndex];
         tempChart.update();
+
+        let selectedDate = {{ weather|safe }}[dayIndex].date;
+        document.getElementById("selectedDate").innerText = `(${selectedDate})`;
     }
 </script>
 

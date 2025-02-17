@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Twoje ulubione miasta</h2>
+    <ul class="list-group">
+        {% for city in cities %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'weather:get_weather' %}?city={{ city.city_name }}" class="text-decoration-none">
+                    {{ city.city_name }}
+                </a>
+                <a href="{% url 'accounts:delete_favorite_city' city.id %}" class="btn btn-danger btn-sm">Usuń</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'accounts:add_favorite_city' %}" class="btn btn-primary mt-3">Dodaj nowe miasto</a>
+</div>
+{% endblock %}
